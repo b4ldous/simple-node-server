@@ -5,9 +5,13 @@ const mongoose = require("mongoose");
 const userModel = require("./models");
 
 const app = express();
-const port = 3001;
+const port = 80;
 
-app.use(cors());
+const corsOptions = {
+    origin: 'https://serene-sprite-d0db7c.netlify.app/',
+    credentials: true,
+};
+app.use(cors(corsOptions));
 
 mongoose.connect('mongodb+srv://logrocket:logrocket@cluster0.nz7mjrm.mongodb.net/?retryWrites=true&w=majority',
     {
@@ -23,8 +27,8 @@ db.once("open", function () {
 });
 
 // Configuring body parser middleware
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(bodyParser.json());
 
 app.get('/details', async (req, res) => {
     // const user = await userModel.findOne({id: 123});
